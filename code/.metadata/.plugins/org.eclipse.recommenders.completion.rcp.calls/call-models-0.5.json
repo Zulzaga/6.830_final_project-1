@@ -1,0 +1,17 @@
+{
+  "/Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/rt.jar": {
+    "location": "/Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/rt.jar",
+    "status": "UNRESOLVED",
+    "error": "No call model found for \u0027/Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/rt.jar\u0027. Neither fingerprint \u0027539271c6b10515bfae069ddefdefa0c356f8f46c\u0027 nor symbolic name \u0027jre\u0027 are known."
+  },
+  "/Users/danamukusheva/Documents/MIT/Fall 2015/6.814/6.830_final_project/code/MiniDB/src": {
+    "location": "/Users/danamukusheva/Documents/MIT/Fall 2015/6.814/6.830_final_project/code/MiniDB/src",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027/Users/danamukusheva/Documents/MIT/Fall 2015/6.814/6.830_final_project/code/MiniDB/src\u0027. Skipped."
+  },
+  "/Users/danamukusheva/Documents/MIT/Fall 2015/6.814/6.830_final_project/code/MiniDB/lib/json-simple-1.1.1.jar": {
+    "location": "/Users/danamukusheva/Documents/MIT/Fall 2015/6.814/6.830_final_project/code/MiniDB/lib/json-simple-1.1.1.jar",
+    "status": "UNRESOLVED",
+    "error": "No call model found for \u0027/Users/danamukusheva/Documents/MIT/Fall 2015/6.814/6.830_final_project/code/MiniDB/lib/json-simple-1.1.1.jar\u0027. Neither fingerprint \u00275d6f9b6a9ddca2a28c0216cc44efb2e20d9c23b5\u0027 nor symbolic name \u0027com.googlecode.json-simple\u0027 are known."
+  }
+}

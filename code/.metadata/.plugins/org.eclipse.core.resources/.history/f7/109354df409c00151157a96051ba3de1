@@ -155,7 +155,7 @@ public class CrackerColumnCrackTest {
 		
 	}
 	
-	@Test //Fails now
+	@Test
 	public void testCrackFourTimes() {
 		System.out.println("\n\nTEST 5: testCrackFourTimes: '<', '>', '<=', '>='");
 		int N = 15; // number of elements in the array

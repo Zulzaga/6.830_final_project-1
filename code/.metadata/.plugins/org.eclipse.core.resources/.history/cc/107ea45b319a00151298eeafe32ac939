@@ -1,5 +1,0 @@
-package minidb;
-
-public interface Column {
-
-}

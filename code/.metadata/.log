@@ -167,3 +167,13 @@ org.eclipse.swt.SWTException: Widget is disposed
 
 !ENTRY org.eclipse.jdt.core 4 0 2015-12-05 21:07:57.360
 !MESSAGE Invalid ZIP archive: src/minidb/testWorkload.json [in MiniDB]
+!SESSION 2015-12-06 12:43:04.825 -----------------------------------------------
+eclipse.buildId=4.3.0.M20130911-1000
+java.version=1.8.0_31
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product -product org.eclipse.epp.package.java.product -product org.eclipse.epp.package.java.product -product org.eclipse.epp.package.java.product -keyring /Users/danamukusheva/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.java.product -product org.eclipse.epp.package.java.product -product org.eclipse.epp.package.java.product -data /Users/danamukusheva/Documents/MIT/Fall 2015/6.814/6.830_final_project/code -product org.eclipse.epp.package.java.product -keyring /Users/danamukusheva/.eclipse_keyring -showlocation
+
+!ENTRY org.eclipse.core.net 1 0 2015-12-06 12:43:08.513
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences

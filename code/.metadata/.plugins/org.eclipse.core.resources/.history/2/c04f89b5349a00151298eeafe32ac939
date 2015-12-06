@@ -1,5 +1,0 @@
-package minidb;
-
-public class CrackerColumn implements Column{
-
-}
