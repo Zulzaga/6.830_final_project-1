@@ -60,6 +60,8 @@ public class CrackerColumn{
 		return this.values;
 	}
 	
+	
+	
 	/**
 	 * OpenRange (range is < or > or <= or >=)
 	 * Cracking involves:
@@ -230,25 +232,21 @@ public class CrackerColumn{
 			x3 = this.values.get(posx3);
 		}
 		
-//		System.out.println("***");
 		while(posx1<=posx3){
 			if (compareTheta3(x1, low, incL, incH)){
 				posx1++;
 				x1 = this.values.get(posx1);
-//				System.out.println("**posx1 "+posx1);
-//				System.out.println("**x1 "+x1);
 			}
 			else{
 				this.swap(posx1, posx3);
-				System.out.println("posx1 "+posx1);
-				System.out.println("posx2 "+posx2);
-				System.out.println("posx3 "+posx3);
-				System.out.println(this.values);
 				x3 = this.values.get(posx3);
 				x1 = this.values.get(posx1);
 				x2 = this.values.get(posx2);
+				if(x1==x3 && posx1==posx3){
+					//System.out.println("BROKE HERE");
+					break;
+				}
 				while(compareTheta2(x3, low, incL, incH) && (posx3>posx1)){
-					//System.out.println("x3 "+x3);
 					if(compareTheta1(x3, high, incL, incH)){
 						this.swap(posx2, posx3);
 						posx2--;
@@ -256,16 +254,12 @@ public class CrackerColumn{
 					}
 					posx3--;
 					x3 = this.values.get(posx3);
-//					System.out.println("posx1 "+posx1);
-//					System.out.println("posx2 "+posx2);
-//					System.out.println("posx3 "+posx3);
 					x1 = this.values.get(posx1);
 					x2 = this.values.get(posx2);
 				}
 				
 			}
 		}
-		//System.out.println("***");
 		
 		return new Pair(this.findPivotIndexLow(posL, posH, low, incL), this.findPivotIndexLow(posL, posH, high, incH)); //TODO
 	}
@@ -275,10 +269,10 @@ public class CrackerColumn{
 			return  val1>val2;
 		}
 		else if (incL && !incH){
-			return val1>val2;
+			return val1>=val2;//>
 		}
 		else if (!incL && incH){
-			return val1>=val2;
+			return val1>val2;//>=
 		}
 		else if (!incL && !incH){
 			return val1>=val2;
@@ -298,7 +292,7 @@ public class CrackerColumn{
 			return val1>=val2;
 		}
 		else if (!incL && incH){
-			return val1>=val2;
+			return val1>val2;//
 		}
 		else if (!incL && !incH){
 			return val1>val2;
@@ -311,7 +305,7 @@ public class CrackerColumn{
 	
 	private boolean compareTheta3(Integer val1, Integer val2, boolean incL, boolean incH){
 		if (incL && incH){
-			return  val1<=val2;
+			return  val1<val2;
 		}
 		else if (incL && !incH){
 			return val1<val2;
@@ -372,7 +366,18 @@ public class CrackerColumn{
 		}
 		return pivotIndex-1;
 	}
-	
+	/**
+	 * If incL, then the the pivot begins one index earlier
+	 * than the first value that is >=valLow;
+	 * else pivot begins one index earlier than the first value that is >valLow
+	 * 
+	 * If all values are smaller than valLow,then return -1
+	 * @param posL
+	 * @param posH
+	 * @param valLow
+	 * @param incL
+	 * @return
+	 */
 	private int findPivotIndexLow(int posL, int posH, Integer valLow, boolean incL){
 		int pivotIndexLow = -1;
 		for(int i = posL; i <=posH; i++){
@@ -380,13 +385,13 @@ public class CrackerColumn{
 			if (incL){
 				if (currentVal>=valLow){//everything before was < value, inclusive 
 					pivotIndexLow = i;
-					break;
+					return pivotIndexLow-1;
 				}
 			}
 			else{
 				if (currentVal>valLow){//everything before was <= value, exclusive crackInTwo
 					pivotIndexLow = i;
-					break;
+					return pivotIndexLow-1;
 				}
 			}
 		}

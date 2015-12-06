@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="CrackingAlgorithms" project="MiniDB" tests="3" started="3" failures="0" errors="0" ignored="0">
+  <testsuite name="tests.CrackingAlgorithms" time="0.0">
+    <testcase name="testCrackInThreeExcl" classname="tests.CrackingAlgorithms" time="0.0"/>
+    <testcase name="testCrackInThreeIncl" classname="tests.CrackingAlgorithms" time="0.0"/>
+    <testcase name="testCrackInThreeExclRandom" classname="tests.CrackingAlgorithms" time="0.0"/>
+  </testsuite>
+</testrun>

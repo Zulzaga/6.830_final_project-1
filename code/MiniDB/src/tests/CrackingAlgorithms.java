@@ -12,6 +12,24 @@ import java.util.Random;
 import org.junit.Test;
 
 public class CrackingAlgorithms {
+	@Test 
+	public void testAllLess(){
+		Integer[] numbers = {10,5,4,7,8};
+		ArrayList<Integer> values = new ArrayList<Integer>(Arrays.asList(numbers));
+		
+		System.out.println("Values "+values);
+		CrackerColumn c = new CrackerColumn(values);
+		Integer low = 11;
+		Integer high = 20;
+		try {
+			c.crackInThree(0, 4, low, high, true, true);
+			System.out.println(c.getValues());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 
 //	@Test
 //	public void testCrackInTwoIncl(){
@@ -146,18 +164,15 @@ public class CrackingAlgorithms {
 //		Integer pivotLow = 10;
 //		System.out.println("Pivot value low: "+pivotLow);
 //
-//		Integer pivotHigh = 20;
+//		Integer pivotHigh = 21;
 //		System.out.println("Pivot value high: "+pivotHigh);
 //		
 //		try {
 //			Pair p = c.crackInThree(0, 14, pivotLow, pivotHigh, true, true);
-//			System.out.println("Array after cracking: " +c.getValues());
-//			System.out.println(p.getFirst());
-//			System.out.println(p.getSecond());
 //			for (int i = 0; i < c.getValues().size(); i++){
-//				Integer val = c.getValue(i);
+//				Integer val = c.getValues().get(i);
 //				if (i<=p.getFirst()){
-//					assertTrue(val<=pivotLow);
+//					assertTrue(val<pivotLow);
 //				}
 //				if (i<=p.getSecond()){
 //					assertTrue(val<=pivotHigh);
@@ -171,47 +186,145 @@ public class CrackingAlgorithms {
 //			e.printStackTrace();
 //		}
 //	}
-	@Test	
-	public void testCrackInThreeExcl(){
-		
-		System.out.println("\nTEST 5: testCrackInThree Exclusive.");
-		int N = 15; // number of elements in the array
-		int maxInt = 30; // maximum value in the array
-		
-		
-		Integer[] numbers = {1, 10, 23, 8, 14, 25, 7, 11,27, 4, 15, 20, 6,19,19};
-		ArrayList<Integer> values = new ArrayList<Integer>(Arrays.asList(numbers));
-		
-		
-		CrackerColumn c = new CrackerColumn(values);
-		
-		Integer pivotLow = 10;
-		System.out.println("Pivot value low: "+pivotLow);
-
-		Integer pivotHigh = 20;
-		System.out.println("Pivot value high: "+pivotHigh);
-		
-		try {
-			Pair p = c.crackInThree(0, 14, pivotLow, pivotHigh, false, false);
-			System.out.println("Array after cracking: " +c.getValues());
-			for (int i = 0; i < c.getValues().size(); i++){
-				Integer val = c.getValues().get(i);
-				if (i<=p.getFirst()){
-					assertTrue(val<pivotLow);
-				}
-				if (i<=p.getSecond()){
-					assertTrue(val<pivotHigh);
-				}
-				else{
-					assertTrue(val>=pivotHigh);
-				}
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	
+//	@Test	
+//	public void testCrackInThreeExcl(){
+//		
+//		System.out.println("\nTEST 5: testCrackInThree Exclusive.");
+//		int N = 15; // number of elements in the array
+//		int maxInt = 30; // maximum value in the array
+//		
+//		
+//		Integer[] numbers = {1, 10, 23, 8, 14, 25, 7, 11,27, 4, 15, 20, 6,19,19};
+//		ArrayList<Integer> values = new ArrayList<Integer>(Arrays.asList(numbers));
+//		
+//		
+//		CrackerColumn c = new CrackerColumn(values);
+//		
+//		Integer pivotLow = 10;
+//		System.out.println("Pivot value low: "+pivotLow);
+//
+//		Integer pivotHigh = 20;
+//		System.out.println("Pivot value high: "+pivotHigh);
+//		
+//		try {
+//			Pair p = c.crackInThree(0, 14, pivotLow, pivotHigh, false, false);
+//			System.out.println("Array after cracking: " +c.getValues());
+//			System.out.println(p.getFirst());
+//			System.out.println(p.getSecond());
+//			for (int i = 0; i < c.getValues().size(); i++){
+//				Integer val = c.getValues().get(i);
+//				if (i<=p.getFirst()){
+//					assertTrue(val<=pivotLow);
+//				}
+//				if (i<=p.getSecond()){
+//					assertTrue(val<pivotHigh);
+//				}
+//				else{
+//					assertTrue(val>=pivotHigh);
+//				}
+//			}
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
+//	
+//	@Test	
+//	public void testCrackInThreeExclRandom(){
+//		
+//		System.out.println("\nTEST 6: testCrackInThreeExclRandom Exclusive.");
+//		int N = 20; // number of elements in the array
+//		int maxInt = 100; // maximum value in the array
+//		
+//		
+//		Random randomGen = new Random();
+//		ArrayList<Integer> values = new ArrayList<Integer>();
+//		for (int i = 0; i< N; i++){
+//			values.add(randomGen.nextInt(maxInt));
+//		}
+//		
+//		System.out.println("Array after cracking: " +values);
+//		CrackerColumn c = new CrackerColumn(values);
+//		
+//		int pivotLowInd = 10;
+//		Integer pivotLow = values.get(pivotLowInd);
+//		System.out.println("Pivot value low: "+pivotLow);
+//
+//		int pivotHighInd = 14;
+//		Integer pivotHigh = values.get(pivotHighInd);
+//		System.out.println("Pivot value high: "+pivotHigh);
+//		
+//		try {
+//			Pair p = c.crackInThree(0, N-1, pivotLow, pivotHigh, false, false);
+//			System.out.println("Array after cracking: " +c.getValues());
+//			System.out.println(p.getFirst());
+//			System.out.println(p.getSecond());
+//			for (int i = 0; i < c.getValues().size(); i++){
+//				Integer val = c.getValues().get(i);
+//				if (i<=p.getFirst()){
+//					assertTrue(val<=pivotLow);
+//				}
+//				if (i<=p.getSecond()){
+//					assertTrue(val<pivotHigh);
+//				}
+//				else{
+//					assertTrue(val>=pivotHigh);
+//				}
+//			}
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
+//	
+//	@Test	
+//	public void testCrackInThreeInclRandom(){
+//		
+//		System.out.println("\nTEST 7: testCrackInThreeInclRandom Inclusive.");
+//		int N = 20; // number of elements in the array
+//		int maxInt = 100; // maximum value in the array
+//		
+//		
+//		Random randomGen = new Random();
+//		ArrayList<Integer> values = new ArrayList<Integer>();
+//		for (int i = 0; i< N; i++){
+//			values.add(randomGen.nextInt(maxInt));
+//		}
+//		
+//		System.out.println("Array after cracking: " +values);
+//		CrackerColumn c = new CrackerColumn(values);
+//		
+//		int pivotLowInd = 10;
+//		Integer pivotLow = values.get(pivotLowInd);
+//		System.out.println("Pivot value low: "+pivotLow);
+//
+//		int pivotHighInd = 14;
+//		Integer pivotHigh = values.get(pivotHighInd);
+//		System.out.println("Pivot value high: "+pivotHigh);
+//		
+//		try {
+//			Pair p = c.crackInThree(0, N-1, pivotLow, pivotHigh, true, true);
+//			System.out.println("Array after cracking: " +c.getValues());
+//			System.out.println(p.getFirst());
+//			System.out.println(p.getSecond());
+//			for (int i = 0; i < c.getValues().size(); i++){
+//				Integer val = c.getValues().get(i);
+//				if (i<=p.getFirst()){
+//					assertTrue(val<pivotLow);
+//				}
+//				if (i<=p.getSecond()){
+//					assertTrue(val<=pivotHigh);
+//				}
+//				else{
+//					assertTrue(val>pivotHigh);
+//				}
+//			}
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
+//	
+//	
 
 }
