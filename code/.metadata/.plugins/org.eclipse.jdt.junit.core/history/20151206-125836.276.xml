@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="SortedColumnTest" project="MiniDB" tests="2" started="2" failures="0" errors="0" ignored="0">
+  <testsuite name="tests.SortedColumnTest" time="0.0">
+    <testcase name="testRadixSort" classname="tests.SortedColumnTest" time="0.0"/>
+    <testcase name="testQuickSort" classname="tests.SortedColumnTest" time="0.0"/>
+  </testsuite>
+</testrun>

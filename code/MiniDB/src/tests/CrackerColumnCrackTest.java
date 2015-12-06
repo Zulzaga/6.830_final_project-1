@@ -155,7 +155,7 @@ public class CrackerColumnCrackTest {
 		
 	}
 	
-	@Test //Fails now
+	@Test //Fails now :(
 	public void testCrackFourTimes() {
 		System.out.println("\n\nTEST 5: testCrackFourTimes: '<', '>', '<=', '>='");
 		int N = 15; // number of elements in the array
@@ -225,7 +225,7 @@ public class CrackerColumnCrackTest {
 			System.out.println("Result: "+result);
 			System.out.println("Array after cracking: "+c.getValues());
 			for(Integer val : result){
-				assertTrue(val <= pivot1);
+				assertTrue(val <= pivot3);
 			}
 			
 		} catch (Exception e) {

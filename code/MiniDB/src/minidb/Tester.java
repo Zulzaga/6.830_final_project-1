@@ -228,7 +228,7 @@ public class Tester {
 
 		db.createSimpleColumnCracking(colname);
 		try {
-			db.populateColumn(colname, 0, 100, 10000);
+			db.populateColumn(colname, 0, 1000, 100000);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

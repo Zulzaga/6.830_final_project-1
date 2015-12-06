@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="tests" project="MiniDB" tests="13" started="13" failures="0" errors="0" ignored="0">
+  <testsuite name="tests.CrackerIndexAVLTest" time="0.0">
+    <testcase name="testOneValue" classname="tests.CrackerIndexAVLTest" time="0.0"/>
+    <testcase name="testThreeValues" classname="tests.CrackerIndexAVLTest" time="0.0"/>
+  </testsuite>
+  <testsuite name="tests.CrackingAlgorithms" time="0.001">
+    <testcase name="testCrackInTwoRandom" classname="tests.CrackingAlgorithms" time="0.0"/>
+    <testcase name="testCrackInTwoExcl" classname="tests.CrackingAlgorithms" time="0.0"/>
+    <testcase name="testCrackInTwoIncl" classname="tests.CrackingAlgorithms" time="0.001"/>
+  </testsuite>
+  <testsuite name="tests.RangeScanTest" time="0.0">
+    <testcase name="testSimpleRange" classname="tests.RangeScanTest" time="0.0"/>
+  </testsuite>
+  <testsuite name="tests.TesterTest" time="0.0">
+    <testcase name="testGenerateWorkload" classname="tests.TesterTest" time="0.0"/>
+  </testsuite>
+  <testsuite name="tests.SortedColumnTest" time="0.0">
+    <testcase name="testRadixSort" classname="tests.SortedColumnTest" time="0.0"/>
+  </testsuite>
+  <testsuite name="tests.CrackerColumnCrackTest" time="0.0">
+    <testcase name="testCrackRangeGreaterThanOrEqual" classname="tests.CrackerColumnCrackTest" time="0.0"/>
+    <testcase name="testCrackRangeGreaterThan" classname="tests.CrackerColumnCrackTest" time="0.0"/>
+    <testcase name="testCrackRangeLessThan" classname="tests.CrackerColumnCrackTest" time="0.0"/>
+    <testcase name="testCrackRangeLessThanOrEqual" classname="tests.CrackerColumnCrackTest" time="0.0"/>
+    <testcase name="testCrackFourTimes" classname="tests.CrackerColumnCrackTest" time="0.0"/>
+  </testsuite>
+</testrun>

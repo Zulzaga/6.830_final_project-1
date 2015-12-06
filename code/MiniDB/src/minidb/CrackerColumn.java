@@ -10,6 +10,22 @@ import java.util.Collections;
  *
  */
 public class CrackerColumn{
+	public class Pair{
+		public int first;
+		public int second;
+		
+		public Pair(int first, int second){
+			this.first = first;
+			this.second = second;
+		}
+		
+		public int getFirst(){
+			return this.first;
+		}
+		public int getSecond(){
+			return this.second;
+		}
+	}
 	
 	public ArrayList<Integer> values;
 	public CrackerIndex crackerIndex;
@@ -185,10 +201,132 @@ public class CrackerColumn{
 		}
 		
 		return this.findPivotIndex(posL, posH, val, inc);
-		
-		
+	
 	}
 	
+	public Pair crackInThree(int posL, int posH, Integer low, Integer high, boolean incL, boolean incH) throws Exception{
+		Integer x1 = this.values.get(posL);
+		Integer x2 = this.values.get(posH);
+		int posx1 = posL;
+		int posx2 = posH;
+
+		while(compareTheta1(x2, high, incL, incH) && (posx2>posx1)){
+			posx2--;
+			x2 = this.values.get(posx2);
+		}
+		
+		
+		
+		int posx3 = posx2;
+		Integer x3 = this.values.get(posx3);
+		while(compareTheta2(x3, low, incL, incH) && (posx3>posx1)){
+
+			if (compareTheta1(x3, high, incL, incH)){
+				this.swap(posx2, posx3);
+				posx2--;
+				x2 = this.values.get(posx2);
+			}
+			posx3--;
+			x3 = this.values.get(posx3);
+		}
+		
+//		System.out.println("***");
+		while(posx1<=posx3){
+			if (compareTheta3(x1, low, incL, incH)){
+				posx1++;
+				x1 = this.values.get(posx1);
+//				System.out.println("**posx1 "+posx1);
+//				System.out.println("**x1 "+x1);
+			}
+			else{
+				this.swap(posx1, posx3);
+				System.out.println("posx1 "+posx1);
+				System.out.println("posx2 "+posx2);
+				System.out.println("posx3 "+posx3);
+				System.out.println(this.values);
+				x3 = this.values.get(posx3);
+				x1 = this.values.get(posx1);
+				x2 = this.values.get(posx2);
+				while(compareTheta2(x3, low, incL, incH) && (posx3>posx1)){
+					//System.out.println("x3 "+x3);
+					if(compareTheta1(x3, high, incL, incH)){
+						this.swap(posx2, posx3);
+						posx2--;
+						x2 = this.values.get(posx2);
+					}
+					posx3--;
+					x3 = this.values.get(posx3);
+//					System.out.println("posx1 "+posx1);
+//					System.out.println("posx2 "+posx2);
+//					System.out.println("posx3 "+posx3);
+					x1 = this.values.get(posx1);
+					x2 = this.values.get(posx2);
+				}
+				
+			}
+		}
+		//System.out.println("***");
+		
+		return new Pair(this.findPivotIndexLow(posL, posH, low, incL), this.findPivotIndexLow(posL, posH, high, incH)); //TODO
+	}
+	
+	private boolean compareTheta1(Integer val1, Integer val2, boolean incL, boolean incH){
+		if (incL && incH){
+			return  val1>val2;
+		}
+		else if (incL && !incH){
+			return val1>val2;
+		}
+		else if (!incL && incH){
+			return val1>=val2;
+		}
+		else if (!incL && !incH){
+			return val1>=val2;
+			
+		}
+		else{
+			System.err.println("CrackerColumn compareTheta1: invalid incL and incH combination");
+			return false;
+		}
+	}
+	
+	private boolean compareTheta2(Integer val1, Integer val2, boolean incL, boolean incH){
+		if (incL && incH){
+			return  val1>=val2;
+		}
+		else if (incL && !incH){
+			return val1>=val2;
+		}
+		else if (!incL && incH){
+			return val1>=val2;
+		}
+		else if (!incL && !incH){
+			return val1>val2;
+		}
+		else{
+			System.err.println("CrackerColumn compareTheta1: invalid incL and incH combination");
+			return false;
+		}
+	}
+	
+	private boolean compareTheta3(Integer val1, Integer val2, boolean incL, boolean incH){
+		if (incL && incH){
+			return  val1<=val2;
+		}
+		else if (incL && !incH){
+			return val1<val2;
+		}
+		else if (!incL && incH){
+			return val1<=val2;
+		}
+		else if (!incL && !incH){
+			return val1<val2;
+		}
+		else{
+			System.err.println("CrackerColumn compareTheta1: invalid incL and incH combination");
+			return false;
+		}
+	}
 	/*
 	 * Helpers
 	 */
@@ -235,6 +373,55 @@ public class CrackerColumn{
 		return pivotIndex-1;
 	}
 	
+	private int findPivotIndexLow(int posL, int posH, Integer valLow, boolean incL){
+		int pivotIndexLow = -1;
+		for(int i = posL; i <=posH; i++){
+			Integer currentVal = this.values.get(i);
+			if (incL){
+				if (currentVal>=valLow){//everything before was < value, inclusive 
+					pivotIndexLow = i;
+					break;
+				}
+			}
+			else{
+				if (currentVal>valLow){//everything before was <= value, exclusive crackInTwo
+					pivotIndexLow = i;
+					break;
+				}
+			}
+		}
+		
+		//if everything in the array was less than valLow
+		if (pivotIndexLow == -1){
+			return posH;
+		}
+		return pivotIndexLow-1;
+	}
+	
+	private int findPivotIndexHigh(int posL, int posH, Integer valHigh, boolean incH){
+		int pivotIndexHigh = -1;
+		for(int i = posH; i <=posL; i--){
+			Integer currentVal = this.values.get(i);
+			if (incH){
+				if (currentVal<=valHigh){//everything before was < value, inclusive 
+					pivotIndexHigh = i;
+					break;
+				}
+			}
+			else{
+				if (currentVal<valHigh){//everything before was <= value, exclusive crackInTwo
+					pivotIndexHigh = i;
+					break;
+				}
+			}
+		}
+		
+		//if everything in the array was greater than valHigh
+		if (pivotIndexHigh == -1){
+			return 0;
+		}
+		return pivotIndexHigh-1;
+	}
 	
 	
 
