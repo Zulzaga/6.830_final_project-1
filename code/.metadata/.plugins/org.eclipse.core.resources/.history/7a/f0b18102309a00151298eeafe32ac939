@@ -1,0 +1,10 @@
+package minidb;
+
+/**
+ * This class represents range scan ona  specified column object
+ * @author danamukusheva
+ *
+ */
+public class RangeScan {
+
+}

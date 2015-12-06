@@ -1,0 +1,37 @@
+package minidb;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+/**
+ * This class represents a Cracker Column, a copy of a regular column
+ * that will be partitioned with each range query. 
+ * @author danamukusheva
+ *
+ */
+public class CrackerColumn{
+	
+	public ArrayList<Integer> values;
+	public CrackerIndex crackerIndex = new CrackerIndexAVL();
+	
+	public CrackerColumn(ArrayList<Integer> originalValues){
+		this.values = this.copyValues(originalValues);
+		
+	}
+	
+	/**
+	 * Deep copy all the values into a new array
+	 * @param values
+	 * @return
+	 */
+	private ArrayList<Integer> copyValues(ArrayList<Integer> values){
+		ArrayList<Integer> newValues = new ArrayList<Integer>();
+		//TODO
+		return newValues;
+		
+	}
+	
+	public void crack();
+
+
+}

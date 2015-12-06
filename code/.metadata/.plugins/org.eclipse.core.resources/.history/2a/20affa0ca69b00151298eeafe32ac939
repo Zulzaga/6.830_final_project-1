@@ -1,0 +1,26 @@
+package tests;
+
+import static org.junit.Assert.*;
+import minidb.*;
+
+import org.junit.Test;
+
+public class RangeScanTest {
+
+	@Test
+	public void testSimpleRange() {
+		//Create and populate column
+		Integer[] numbers = {2, 3, 5, 1, 19, 14, 8, 12, 7, 18};
+		SimpleColumn col = new SimpleColumn("sc1", true);
+		for (Integer i:numbers){
+			col.insertTuple(i);
+		}
+		try {
+			RangeScan rs = new RangeScan(col, 12, null, "<");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+}

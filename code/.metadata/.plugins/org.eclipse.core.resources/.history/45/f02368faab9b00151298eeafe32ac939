@@ -1,0 +1,23 @@
+package tests;
+
+import static org.junit.Assert.*;
+
+import java.net.URL;
+
+import minidb.*;
+
+import org.json.simple.JSONObject;
+import org.junit.Test;
+
+public class TesterTes {
+
+	@Test
+	public void testParseFile() {
+		Tester test = new Tester();
+		String filename = "/MiniDB/src/tests/testWorkload.json";
+		URL url = getClass().getResource("testWorkload.json");
+		JSONObject obj = test.parseFile("testWorkload.json");
+		System.out.print(obj);
+		}
+
+}

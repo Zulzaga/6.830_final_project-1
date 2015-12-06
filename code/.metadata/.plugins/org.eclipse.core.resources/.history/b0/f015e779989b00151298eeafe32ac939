@@ -1,0 +1,15 @@
+package tests;
+
+import static org.junit.Assert.*;
+import minidb.*;
+
+import org.junit.Test;
+
+public class CrackerColumnCrackTest {
+
+	@Test
+	public void test() {
+		fail("Not yet implemented");
+	}
+
+}

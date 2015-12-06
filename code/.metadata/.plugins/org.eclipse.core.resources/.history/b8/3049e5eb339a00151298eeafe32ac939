@@ -1,0 +1,9 @@
+package minidb;
+
+import java.util.Iterator;
+
+public interface Column {
+
+	Iterator<Integer> getIterator();
+
+}

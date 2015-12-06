@@ -1,0 +1,16 @@
+package minidb;
+
+/**
+ * This class represents a query.
+ * Each query specifies a column it operates on (since we always work with one column at a time,
+ * no joins) and a predicate
+ * 
+ *  
+ * @author danamukusheva
+ *
+ */
+public class Query {
+	
+	private Column column; //
+	private Predicate pred
+}

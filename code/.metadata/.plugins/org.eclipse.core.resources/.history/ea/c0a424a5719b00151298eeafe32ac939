@@ -1,0 +1,5 @@
+package minidb;
+
+public interface CrackerIndex {
+
+}

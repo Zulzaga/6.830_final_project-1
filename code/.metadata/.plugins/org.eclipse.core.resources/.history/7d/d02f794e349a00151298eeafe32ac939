@@ -1,0 +1,29 @@
+package minidb;
+
+import java.util.Iterator;
+
+public interface Column {
+	//TODO
+	/**
+	 * Get column name
+	 * @return String
+	 */
+	String getName();
+	
+	/**
+	 * Get iterator over tuples (Integer objects)
+	 * @return
+	 */
+	Iterator<Integer> getIterator();
+	
+	/**
+	 * Add a tuple at the specified index
+	 * @param value Integer obj
+	 * @param index int, 
+	 */
+	void insertTuple(Integer value, int index);
+	void insertTuple(Integer value);
+	
+	void deleteTuple(Integer value, int index);
+	void deleteTuple(int index);
+}

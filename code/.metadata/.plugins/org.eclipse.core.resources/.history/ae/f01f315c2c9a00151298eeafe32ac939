@@ -1,0 +1,6 @@
+package minidb;
+
+public class Database {
+	private static AtomicReference<Database> _instance = new AtomicReference<Database>(new Database());
+
+}

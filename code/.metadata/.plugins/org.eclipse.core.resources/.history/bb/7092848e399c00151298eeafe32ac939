@@ -1,0 +1,88 @@
+package minidb;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+public class SortedColumn implements Column{
+	
+	public String name;
+	public ArrayList<Integer> values = new ArrayList<Integer>();
+	
+	public SortedColumn(String name){
+		this.name = name;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public Iterator<Integer> getIterator() {
+		return values.iterator();
+	}
+
+	public boolean useCracking() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean isCracked() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void markCracked() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void markUncracked() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public CrackerColumn getCrackerColumn() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public CrackerIndex getCrackerIndex() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void initializeCrackerColumn() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void removeCrackerColumn() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void insertTuple(Integer value, int index) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void insertTuple(Integer value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deleteTuple(Integer value, int index) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deleteTuple(int index) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void swap(int index1, int index2) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

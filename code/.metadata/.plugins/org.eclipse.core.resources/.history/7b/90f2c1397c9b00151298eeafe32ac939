@@ -1,0 +1,26 @@
+package tests;
+
+import static org.junit.Assert.*;
+import minidb.CrackerColumn;
+
+import java.util.ArrayList;
+import java.util.Random;
+
+import org.junit.Test;
+
+public class CrackingAlgorithms {
+
+	@Test
+	public void testCrackInTwo() {
+		int N = 10; // number of elements in the array
+		int maxInt = 20; // maximum value in the array
+		
+		
+		
+		Random randomGen = new Random();
+		ArrayList<Integer> values = new ArrayList<Integer>();
+		for(int i; i<)
+		fail("Not yet implemented");
+	}
+
+}

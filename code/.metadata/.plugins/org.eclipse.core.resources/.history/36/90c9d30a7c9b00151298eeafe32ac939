@@ -1,0 +1,19 @@
+package tests;
+
+import static org.junit.Assert.*;
+import minidb.CrackerColumn;
+import java.util.Random;
+
+import org.junit.Test;
+
+public class CrackingAlgorithms {
+
+	@Test
+	public void testCrackInTwo() {
+		
+		Random randomGen = new Random();
+		ArrayList<Integer> values = new ArrayList<Integer>();
+		fail("Not yet implemented");
+	}
+
+}

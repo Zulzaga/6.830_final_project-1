@@ -1,0 +1,15 @@
+package tests;
+
+import static org.junit.Assert.*;
+import minidb.*;
+
+import org.junit.Test;
+
+public class CrackerIndexAVLTest {
+
+	@Test
+	public void testInsertAndFind() {
+		fail("Not yet implemented");
+	}
+
+}

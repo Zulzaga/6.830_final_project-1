@@ -1,0 +1,39 @@
+package minidb;
+
+public class CrackerIndexAVL implements CrackerIndex {
+	
+	public AVLTree avltree = new AVLTree();
+	
+
+	public int findIndexValue(Integer k) {
+		// TODO Auto-generated method stub
+		AVLNode node = avltree.find(k);
+		if (node == null){
+			return -1; //no such node in the tree
+		}
+		else{
+			return node.getPosition();
+		}
+	}
+
+	public void addValue(Integer k, int index) {
+		avltree.insert(k, index);
+
+	}
+
+	public void setPositionForExistingValue(Integer k, int index) {
+		avltree.find(k).setPosition(index);
+		
+	}
+
+	public int findNextGreaterIndex(Integer k) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int findNextSmallerIndex(Integer k) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

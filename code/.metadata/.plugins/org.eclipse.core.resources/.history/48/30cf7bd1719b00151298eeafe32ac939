@@ -1,0 +1,10 @@
+package minidb;
+
+public interface CrackerIndex {
+	
+	/**
+	 * Add new value as query arrives
+	 * @param k
+	 */
+	void addValue(Integer k);
+}

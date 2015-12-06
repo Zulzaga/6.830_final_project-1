@@ -1,0 +1,21 @@
+package minidb;
+
+public interface CrackerIndex {
+	
+	/**
+	 * Look up the node in the cracker index, get the data(index or position)
+	 * stored in the node
+	 * @param k value to look up
+	 * @return index of the value in the CrackerColumn
+	 */
+	int findIndexValue(Integer k);
+	
+	/**
+	 * Add new value to the CrackerIndex as query arrives
+	 * if it does not exist in the tree
+	 * @param k
+	 */
+	void addValue(Integer k, int index);
+	
+	voi
+}

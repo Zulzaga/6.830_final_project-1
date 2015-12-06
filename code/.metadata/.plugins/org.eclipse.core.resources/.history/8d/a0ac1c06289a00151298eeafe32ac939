@@ -1,0 +1,28 @@
+package minidb;
+/**
+ * This class is the one that called from the command line.
+ * 
+ * Usage:
+ * javac **compile whatever needed**
+ * java Tester <filename.json>
+ * 
+ * 
+ * It takes in the file that specifies the test parameters.
+ * filename.json is a json object containing the following information:
+ *  - table: table_name
+ *  - column: column_name
+ *  - range: choose one from [<, >, <=, >=, <<, <=<, <<=, <=<=] 
+ * 
+ * 
+ * @author danamukusheva
+ *
+ */
+public class Tester {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.out.print("Test");
+
+	}
+
+}

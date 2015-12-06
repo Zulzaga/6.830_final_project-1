@@ -1,0 +1,13 @@
+package minidb;
+
+import java.util.Iterator;
+
+public interface Column {
+	/**
+	 * Get column name
+	 * @return String
+	 */
+	String getName();
+	Iterator<Integer> getIterator();
+
+}

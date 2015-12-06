@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="CrackerColumnCrackTest" project="MiniDB" tests="4" started="4" failures="0" errors="0" ignored="0">
+  <testsuite name="tests.CrackerColumnCrackTest" time="0.006">
+    <testcase name="testCrackRangeGreaterThanOrEqual" classname="tests.CrackerColumnCrackTest" time="0.004"/>
+    <testcase name="testCrackRangeGreaterThan" classname="tests.CrackerColumnCrackTest" time="0.001"/>
+    <testcase name="testCrackRangeLessThan" classname="tests.CrackerColumnCrackTest" time="0.0"/>
+    <testcase name="testCrackRangeLessThanOrEqual" classname="tests.CrackerColumnCrackTest" time="0.001"/>
+  </testsuite>
+</testrun>

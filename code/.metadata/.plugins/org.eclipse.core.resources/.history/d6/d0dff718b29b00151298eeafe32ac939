@@ -1,0 +1,141 @@
+package minidb;
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import org.json.simple.*;
+import org.json.simple.parser.JSONParser;
+/**
+ * This class is the one that called from the command line.
+ * 
+ * Usage:
+ * javac **compile whatever needed**
+ * java Tester <filename.json>
+ * 
+ * 
+ * It takes in the file that specifies the test parameters.
+ * 
+ * filename.json contains a json object with following info:
+ *  - column: column_name  //TODO: one column per table, might be unnecessary
+ *  - range: choose one from [<, >, <=, >=, <<, <=<, <<=, <=<=]
+ *  - fixed_range: None or int (put the difference btw low and high if want it to be constant)
+ *  - min_lower_range: None or int
+ *  - max_upper_range : None or int
+ *  - num_queries: positive int 
+ * 
+ * 
+ * @author danamukusheva
+ *
+ */
+public class Tester {
+	
+	//names of json keys, in case they change
+	public String num_queries = "num_queries";
+	public String rangeName = "range";
+	public String fixed_range = "fixed_range";
+	public String min_lower_range = "min_lower_range";
+	public String max_upper_range = "column";
+	public String column = "column";
+
+	public static void main(String[] args) {
+		
+		// Check if used correctly
+		// TODO: add a hint
+		if (args.length != 1){
+			System.err.println("Invalid usage!!!");
+			System.exit(0);
+		}
+		//TODO: instantiate and populate DB
+		
+		String filename = args[0];
+		
+
+	}
+	
+	/**
+	 * Parse the content of the file containing
+	 * info about the test workload and create a corresponding
+	 * JSONObject.
+	 * 
+	 * @param filename String, contains correctly formatted json
+	 * @return JSONObject from file content
+	 */
+	public JSONObject parseFile(String filename){
+		try {
+			String content = readFile(filename, StandardCharsets.UTF_8);
+			JSONParser parser=new JSONParser();
+			Object obj=JSONValue.parse(content);
+			JSONObject jsonobj=(JSONObject) obj;
+			return jsonobj;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.err.print("Error in Tester parseFile.");
+		}
+		return null;
+		
+
+		
+	}
+	/**
+	 * Generate workload using the parameters specified in
+	 * the file
+	 * 
+	 * @param params JSONObject with parameters for workload (see first lines)
+	 * @return array of RangeScan objects
+	 */
+	public ArrayList<RangeScan> generateWorkload(JSONObject params){
+		ArrayList<RangeScan> queries = new ArrayList<RangeScan>();
+		int workloadSize = (Integer) params.get(num_queries);
+		Integer min_lower = (Integer) params.get(min_lower_range);
+		Integer high = (Integer) params.get(max_upper_range);
+		String range = (String) params.get(rangeName);
+		String columnName = (String) params.get(column);
+		Column col;
+		try {
+			col = Database.getColumn(columnName);
+			RangeScan rs;
+			for(int i = 0; i < workloadSize; i++){
+				try {
+					rs = new RangeScan(col, low, high, range);
+					queries.add(rs);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		return queries;
+	}
+	
+	/**
+	 * Run each query on our database, record the time for each
+	 * @param queries Query objects (workload)
+	 * @return list of integers (time in ms, unix time)
+	 */
+	private ArrayList<Integer> testWorkload(ArrayList<RangeScan> rangescans){
+		//TODO
+		return null;
+	}
+	
+	/*
+	 * Helpers
+	 */
+	static String readFile(String path, Charset encoding) throws IOException {
+		File f = new File(path);
+		f.setReadable(true);
+		f.setWritable(true);
+		String content = new Scanner(f).useDelimiter("\\Z").next();
+		return content;
+	}
+}

@@ -1,0 +1,32 @@
+package minidb;
+
+public class CrackerIndexAVL implements CrackerIndex {
+	
+	public AVLTree avltree = new AVLTree();
+
+	public int findIndexValue(Integer k) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public void addValue(Integer k, int index) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void setPositionForExistingValue(Integer k, int index) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public int findNextGreaterIndex(Integer k) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int findNextSmallerIndex(Integer k) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

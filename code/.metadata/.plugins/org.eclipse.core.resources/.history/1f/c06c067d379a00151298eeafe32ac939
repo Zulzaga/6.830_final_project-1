@@ -1,0 +1,14 @@
+package minidb;
+
+import java.util.Iterator;
+
+/**
+ * This class represents a Cracker Column, a copy of a regular column
+ * that will be partitioned with each range. 
+ * @author danamukusheva
+ *
+ */
+public class CrackerColumn{
+
+
+}

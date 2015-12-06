@@ -1,0 +1,43 @@
+package minidb;
+
+import java.util.Iterator;
+
+/**
+ * This class represents range scan on a specified Column object.
+ * 
+ * To create a RangeScan, we need to pass in a Column object,
+ * low value, high value, and type of range:
+ * <, <=, >, >=, <<, <=<, <<=, <=<=
+ * @author danamukusheva
+ *
+ */
+public class RangeScan {
+	
+	private Column column;
+	private Iterator<Integer> childIterator;
+	
+	private Integer low; //Can be null
+	private Integer high; //Can be null
+	private String range;
+	private boolean singleRange; // True if range is <, >, <= or >=
+	
+	public RangeScan(Column col, Integer low, Integer high, String range){
+		
+		if (low == null && high == null){
+			throw new Exception("RangeScan cannot be instantiated: low and high values are both null");
+		}
+		
+		if (low != null && high != null){
+			this.singleRange = false;
+		}
+		else{
+			this.singleRange = true;
+		}
+		this.column = col;
+		this.childIterator = col.getIterator();
+		
+		this.low = low;
+		this.
+	}
+
+}

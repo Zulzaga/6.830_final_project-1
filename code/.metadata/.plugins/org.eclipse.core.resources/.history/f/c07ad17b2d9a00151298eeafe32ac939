@@ -1,0 +1,42 @@
+package minidb;
+
+import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicReference;
+
+/**
+ * This class represents a database, a static instance.
+ * The database contains only columns, since we chose to work with
+ * tables consisting of single columns, therefore table = column. 
+ * Table names have to be unique
+ * 
+ * Class attributes:
+ *  - catalog: HashMap of column names and Column objects. Column name has to be unique
+ *  - something identifying which implementation for CrackerIndex we use //TODO
+ *  
+ * Class methods:
+ *  - getCatalog
+ *  - createColumn
+ *  - listColumnNames
+ *  - populateColumn
+ *  - removeColumn
+ *  
+ * @author danamukusheva
+ *
+ */
+public class Database {
+	private static AtomicReference<Database> _instance = new AtomicReference<Database>(new Database());
+	private final HashMap<String, Column> _catalog;
+	
+	/**
+	 * Constructor
+	 */
+	public Database(){
+		_catalog = new HashMap<String, Column>();
+		
+	}
+	
+	public static HashMap<String, Column> getCatalog() {
+        return _instance.get()._catalog;
+    }
+
+}

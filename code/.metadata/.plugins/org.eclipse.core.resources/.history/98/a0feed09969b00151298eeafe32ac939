@@ -1,0 +1,30 @@
+package tests;
+
+import static org.junit.Assert.*;
+import minidb.*;
+
+import org.junit.Test;
+
+public class CrackerIndexAVLTest {
+
+	@Test
+	public void testOneValue() {
+		int numValues = 1;
+		Integer value = 5;
+		int position = 0;
+		CrackerIndexAVL ci = new CrackerIndexAVL(numValues);
+		ci.addValue(value, position);
+		
+		//Find value
+		int lookup = ci.findIndexValue(value);
+		assertTrue(lookup == position);
+		
+		//Find some other value
+		int lookup2 = ci.findIndexValue(value+1);
+		assertFalse(lookup2==position);
+		
+		//Set value
+		
+	}
+
+}

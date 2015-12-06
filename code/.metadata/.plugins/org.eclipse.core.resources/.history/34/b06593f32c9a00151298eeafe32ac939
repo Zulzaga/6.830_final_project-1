@@ -1,0 +1,28 @@
+package minidb;
+
+import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicReference;
+
+/**
+ * This class represents a database, a static instance. 
+ * Class attributes:
+ *  - catalog: HashMap of column names and Column objects. Column name has to be unique
+ *  
+ * Class methods:
+ * 
+ *  - createColumn
+ *  - populateColumn
+ *  - removeColumn
+ *  
+ * @author danamukusheva
+ *
+ */
+public class Database {
+	private static AtomicReference<Database> _instance = new AtomicReference<Database>(new Database());
+	private final HashMap<String, Column> _catalog;
+	
+	public Database(){
+		_catalog = new HashMap<String, Column>();
+	}
+
+}

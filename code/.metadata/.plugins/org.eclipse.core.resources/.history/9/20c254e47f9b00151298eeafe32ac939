@@ -1,0 +1,152 @@
+package minidb;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+
+/**
+ * This class represents a Cracker Column, a copy of a regular column
+ * that will be partitioned with each range query. 
+ * @author danamukusheva
+ *
+ */
+public class CrackerColumn{
+	
+	public ArrayList<Integer> values;
+	public CrackerIndex crackerIndex = new CrackerIndexAVL();
+	
+	public CrackerColumn(ArrayList<Integer> originalValues){
+		this.values = this.copyValues(originalValues);
+		
+	}
+	
+	/**
+	 * Deep copy all the values into a new array
+	 * @param values
+	 * @return
+	 */
+	private ArrayList<Integer> copyValues(ArrayList<Integer> values){
+		ArrayList<Integer> newValues = new ArrayList<Integer>();
+		for (Integer value:values){
+			newValues.add(value);
+		}
+		return newValues;		
+	}
+	
+	public CrackerIndex getCrackerIndex(){
+		return this.crackerIndex;
+	}
+	public void printValues(){
+		System.out.println(this.values);
+	}
+	
+	/**
+	 * OpenRange (range is < or > or <= or >=)
+	 * Cracking involves:
+	 *  - check value in the CrackerIndex
+	 *      - if exists, return array (to the left, or to the right, depending on range sign)
+	 *      - if doesn't, insert with undefined position, find it, and 
+	 *      crack array between the parent and the node, setPosition for the node
+	 *      
+	 * 
+	 */
+	public ArrayList<Integer> crack(Integer value, String range){
+		//TODO
+		return null;
+	}
+	
+	/**
+	 * Closed range
+	 * @param low lower bound
+	 * @param high upper bound
+	 * @param range String, one of <<, <=<, <<=, <=<=
+	 * @return
+	 */
+	public ArrayList<Integer> crack(Integer low, Integer high, String range){
+		//TODO
+		return null;
+		
+	}
+	
+	/**
+	 * Cracking algorithms
+	 */
+	
+	public void crackInTwo(int posL, int posH, Integer val, boolean inc){
+		Integer x1 = this.values.get(posL);
+		Integer x2 = this.values.get(posH);
+		int posx1 = posL;
+		int posx2 = posH;
+		
+		System.out.println("x1 = " + x1);
+		System.out.println("x2 = " + x2);
+		System.out.println("posx1 = " + posx1);
+		System.out.println("posx2 = " + posx2);
+		
+		while (posx1 < posx2){
+			//if val is inclusive
+			if (inc){
+				if (x1 <= val){
+					posx1+=1;
+					x1 = this.values.get(posx1);
+					System.out.println("x1 = " + x1);
+					System.out.println("x2 = " + x2);
+					System.out.println("posx1 = " + posx1);
+					System.out.println("posx2 = " + posx2);
+				}
+				else{
+					while (x2 > val && posx2 > posx1){
+						posx2-=1;
+						x2 = this.values.get(posx2);
+					}
+					try {
+						this.swap(posx1, posx2);
+						System.out.println("swap: "+this.values);
+						posx1++;
+						posx2--;
+						x1 = this.values.get(posx1);
+						x2 = this.values.get(posx2);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						System.err.println(e.getMessage());
+					}
+				}
+				
+			}
+			else{//val is exclusive
+				if (x1 < val){
+					posx1++;
+					x1 = this.values.get(posx1);
+				}
+				else{
+					while (x2 >= val && posx2 > posx1){
+						posx2--;
+						x2 = this.values.get(posx2);
+					}
+					try {
+						this.swap(posx1, posx2);
+						posx1++;
+						posx2--;
+						x1 = this.values.get(posx1);
+						x2 = this.values.get(x2);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						System.err.println(e.getMessage());
+					}
+				}
+			}
+		}
+		
+	}
+	
+	private void swap(int index1, int index2) throws Exception {
+		if (index1<0 || index1>this.values.size() || index2<0 || index2>this.values.size()){
+			throw new Exception("SimpleColumn swap: specified index is out of bounds!");
+		}
+		Collections.swap(this.values,index1,index2);
+
+	}
+	
+
+
+}

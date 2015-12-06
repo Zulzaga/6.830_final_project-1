@@ -1,0 +1,235 @@
+package minidb;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+
+/**
+ * This class represents a Cracker Column, a copy of a regular column
+ * that will be partitioned with each range query. 
+ * @author danamukusheva
+ *
+ */
+public class CrackerColumn{
+	
+	public ArrayList<Integer> values;
+	public CrackerIndex crackerIndex = new CrackerIndexAVL();
+	private int minPartitionSize = 1; //TODO DECIDE HERE
+	
+	public CrackerColumn(ArrayList<Integer> originalValues){
+		this.values = this.copyValues(originalValues);
+		
+	}
+	
+	/**
+	 * Deep copy all the values into a new array
+	 * @param values
+	 * @return
+	 */
+	private ArrayList<Integer> copyValues(ArrayList<Integer> values){
+		ArrayList<Integer> newValues = new ArrayList<Integer>();
+		for (Integer value:values){
+			newValues.add(value);
+		}
+		return newValues;		
+	}
+	
+	public CrackerIndex getCrackerIndex(){
+		return this.crackerIndex;
+	}
+	public void printValues(){
+		System.out.println(this.values);
+	}
+	
+	public ArrayList<Integer> getValues(){
+		return this.values;
+	}
+	
+	/**
+	 * OpenRange (range is < or > or <= or >=)
+	 * Cracking involves:
+	 *  - check value in the CrackerIndex
+	 *      - if exists, return array (to the left, or to the right, depending on range sign)
+	 *      - if doesn't, insert with undefined position, find it, and 
+	 *      crack array between the parent and the node, setPosition for the node
+	 *      
+	 * 
+	 */
+	public ArrayList<Integer> crack(Integer value, String range){
+		//TODO
+		
+		if(range == "<=" || range == ">"){
+			
+		}
+		else{//range == < or range == >=
+			value = value-1; // to be able to use Index (look into CrackerIndex invariant)
+		}
+		
+		//lookup in the index
+		int index = this.crackerIndex.findIndexValue(value);
+		//found it
+		if (index != -1){
+			if (range == "<="){ //everything to the left, incl
+				return new ArrayList(this.values.subList(0, index+1)); //first arg included, second not according to java specs
+			}
+			else{
+				return new ArrayList(this.values.subList(index+1, this.values.size()));
+			}
+		}
+		//haven't found it, crack the database
+		else{
+			this.crackerIndex.addValue(value, index);
+			int posL = this.crackerIndex.findNextSmallerIndex(value);
+			int posH = this.crackerIndex.findNextSmallerIndex(value);
+			//TODO
+			//DECIDE IF PARTITION FURTHER, MIN partition size
+			int posPivot  = this.crackInTwo(posL, posH, value, true);
+			this.crackerIndex.setPositionForExistingValue(value, posPivot);
+			
+			if (range == "<="){ //everything to the left, incl
+				return new ArrayList(this.values.subList(0, posPivot+1)); //first arg included, second not according to java specs
+			}
+			else{
+				return new ArrayList(this.values.subList(posPivotx+1, this.values.size()));
+			}
+		}
+		
+	}
+	
+	/**
+	 * Closed range
+	 * @param low lower bound
+	 * @param high upper bound
+	 * @param range String, one of <<, <=<, <<=, <=<=
+	 * @return
+	 */
+	public ArrayList<Integer> crack(Integer low, Integer high, String range){
+		//TODO
+		return null;
+		
+	}
+	
+	/*
+	 * Cracking algorithms
+	 */
+	/**
+	 * Source: DB cracking paper
+	 * Partitions the values between indices posL and posH (inclusive) 
+	 * around pivot value val
+	 * @param posL int, index of the beginning of the range
+	 * @param posH int, index of the end of the range
+	 * @param val pivot value, used to partition the array around it
+	 * @param inc boolean IMPORTANT //TODO pay attention to it!
+	 * if true, than we have two partitions: everything <= pivot value and everything > pivot value
+	 * if false, two partitions: everything < pivot and everything >= pivot
+	 * @return pivot position
+	 */
+	public int crackInTwo(int posL, int posH, Integer val, boolean inc){
+		Integer x1 = this.values.get(posL);
+		Integer x2 = this.values.get(posH);
+		int posx1 = posL;
+		int posx2 = posH;
+		
+		while (posx1 < posx2){
+			//if val is inclusive
+			if (inc){
+				if (x1 <= val){
+					posx1+=1;
+					x1 = this.values.get(posx1);
+				}
+				else{
+					while (x2 > val && posx2 > posx1){
+						posx2-=1;
+						x2 = this.values.get(posx2);
+					}
+					try {
+						this.swap(posx1, posx2);
+						posx1++;
+						posx2--;
+						x1 = this.values.get(posx1);
+						x2 = this.values.get(posx2);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						System.err.println(e.getMessage());
+					}
+				}
+				
+			}
+			else{//val is exclusive
+				if (x1 < val){
+					posx1++;
+					x1 = this.values.get(posx1);
+				}
+				else{
+					while (x2 >= val && posx2 > posx1){
+						posx2--;
+						x2 = this.values.get(posx2);
+					}
+					try {
+						this.swap(posx1, posx2);
+						posx1++;
+						posx2--;
+						x1 = this.values.get(posx1);
+						x2 = this.values.get(posx2);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						System.err.println(e.getMessage());
+					}
+				}
+			}
+		}
+		
+		return this.findPivotIndex(posL, posH, val, inc);
+		
+		
+	}
+	
+	/*
+	 * Helpers
+	 */
+	private void swap(int index1, int index2) throws Exception {
+		if (index1<0 || index1>this.values.size() || index2<0 || index2>this.values.size()){
+			throw new Exception("SimpleColumn swap: specified index is out of bounds!");
+		}
+		Collections.swap(this.values,index1,index2);
+
+	}
+	/**
+	 * Find index of the element around which we partitioned array:
+	 * all elements with positions <= than pivot index are either 
+	 * <= value (inc true) or < value (inc false)
+	 * 
+	 * @param posL index 
+	 * @param posH index 
+	 * @param value pivot value
+	 * @return 
+	 */
+	private int findPivotIndex(int posL, int posH, Integer value, boolean inc){
+		int pivotIndex = -1;
+		
+		for(int i = posL; i <=posH; i++){
+			Integer currentVal = this.values.get(i);
+			if (inc){
+				if (currentVal>value){//everything before was <= value, inclusive crackInTwo
+					pivotIndex = i;
+					break;
+				}
+			}
+			else{
+				if (currentVal>=value){//everything before was < value, exclusive crackInTwo
+					pivotIndex = i;
+					break;
+				}
+			}
+		}
+		if (pivotIndex == -1){
+			return posH;
+		}
+		return pivotIndex-1;
+	}
+	
+	
+	
+
+
+}

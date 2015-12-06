@@ -1,0 +1,17 @@
+package tests;
+
+import static org.junit.Assert.*;
+import minidb.*;
+
+import org.junit.Test;
+
+public class CrackerIndexAVLTest {
+
+	@Test
+	public void testInsertAndFind() {
+		int numValues = 1;
+		
+		CrackerIndexAVL ci = new CrackerIndexAVL(numValues);
+	}
+
+}

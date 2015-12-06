@@ -1,0 +1,8 @@
+package minidb;
+
+import java.util.Iterator;
+
+public class CrackerColumn{
+
+
+}

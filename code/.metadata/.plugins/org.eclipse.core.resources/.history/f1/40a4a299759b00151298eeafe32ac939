@@ -1,0 +1,78 @@
+package minidb;
+import java.util.ArrayList;
+
+import org.json.simple.*;
+/**
+ * This class is the one that called from the command line.
+ * 
+ * Usage:
+ * javac **compile whatever needed**
+ * java Tester <filename.json>
+ * 
+ * 
+ * It takes in the file that specifies the test parameters.
+ * 
+ * filename.json contains a json object with following info:
+ *  - column: column_name  //TODO: one column per table, might be unnecessary
+ *  - range: choose one from [<, >, <=, >=, <<, <=<, <<=, <=<=]
+ *  - fixed_range: None or int (put the difference btw low and high if want it to be constant)
+ *  - min_lower_range: None or int
+ *  - max_upper_range : None or int
+ *  - num_queries: positive int 
+ * 
+ * 
+ * @author danamukusheva
+ *
+ */
+public class Tester {
+
+	public static void main(String[] args) {
+		
+		// Check if used correctly
+		// TODO: add a hint
+		if (args.length != 1){
+			System.err.println("Invalid usage!!!");
+			System.exit(0);
+		}
+		
+		String filename = args[0];
+		
+
+	}
+	
+	/**
+	 * Parse the content of the file containing
+	 * info about the test workload and create a corresponding
+	 * JSONObject.
+	 * 
+	 * @param filename String, contains correctly formatted json
+	 * @return JSONObject from file content
+	 */
+	private JSONObject parseFile(String filename){
+		//TODO
+		return null;
+		
+	}
+	/**
+	 * Generate workload using the parameters specified in
+	 * the file
+	 * 
+	 * @param params JSONObject with parameters for workload (see first lines)
+	 * @return array of RangeScan objects
+	 */
+	private ArrayList<RangeScan> generateWorkload(JSONObject params){
+		//TODO
+		return null;
+	}
+	
+	/**
+	 * Run each query on our database, record the time for each
+	 * @param queries Query objects (workload)
+	 * @return list of integers (time in ms, unix time)
+	 */
+	private ArrayList<Integer> testWorkload(ArrayList<RangeScan> rangescans){
+		//TODO
+		return null;
+	}
+
+}

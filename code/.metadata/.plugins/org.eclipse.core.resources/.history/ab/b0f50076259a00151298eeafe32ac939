@@ -1,0 +1,20 @@
+/**
+ * This class is the one called from the command line.
+ * It  take in the file that specifies the test
+ * Usage:
+ * java Tester filename.json
+ * 
+ * filename.json is a json object containing the following
+ * 
+ * 
+ * @author danamukusheva
+ *
+ */
+public class Tester {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

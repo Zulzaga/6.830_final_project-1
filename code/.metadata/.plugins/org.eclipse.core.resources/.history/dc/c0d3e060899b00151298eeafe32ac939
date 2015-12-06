@@ -1,0 +1,35 @@
+package minidb;
+/**
+ * Nodes of the cracker index have: 
+ *  - key: value from the CrackerColumn around which the column is partitioned
+ *  - data: position (index) of the key in array of values of CrackerColumn
+ *  
+ *  ******IMPORTANT*****
+ *  INVARIANT:
+ *  
+ *  For given key k and position p in a single index node, we know that
+ *  all values whose indices are LESS THAN OR EQUAL to position
+ * @author danamukusheva
+ *
+ */
+public interface CrackerIndex {
+	
+	/**
+	 * Look up the node in the cracker index, get the data(index or position)
+	 * stored in the node
+	 * @param k value to look up
+	 * @return index of the value in the CrackerColumn
+	 */
+	int findIndexValue(Integer k);
+	
+	/**
+	 * Add new value to the CrackerIndex as query arrives
+	 * if it does not exist in the tree
+	 * @param k
+	 */
+	void addValue(Integer k, int index);
+	
+	
+	void setPositionForExistingValue(Integer k, int index);
+	
+}

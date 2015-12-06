@@ -1,0 +1,30 @@
+package minidb;
+
+import java.util.ArrayList;
+public class HelloWorld{
+    public ArrayList<Integer> copyValues(ArrayList<Integer> values){
+		ArrayList<Integer> newValues = new ArrayList<Integer>();
+		for (Integer value:values){
+			newValues.add(value);
+		}
+		return newValues;
+		
+	}
+     public static void main(String []args){
+        ArrayList<Integer> l = new ArrayList<Integer>();
+        Integer one = 1;
+        Integer two = 2;
+        Integer three = 3;
+        l.add(one);
+        l.add(two);
+        l.add(three);
+        
+        ArrayList<Integer> copy = copyValues(l);
+        copy.add(10);
+        System.out.println(l);
+        System.out.println(copy);
+    }
+     
+    
+}
+

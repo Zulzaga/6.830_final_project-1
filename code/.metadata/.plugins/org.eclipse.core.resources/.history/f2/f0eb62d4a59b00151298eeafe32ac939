@@ -1,0 +1,19 @@
+package tests;
+
+import static org.junit.Assert.*;
+import minidb.*;
+
+import org.junit.Test;
+
+public class RangeScanTest {
+
+	@Test
+	public void testSimpleRange() {
+		Integer[] numbers = {2, 3, 5, 1, 19, 14, 8, 12, 7, 18};
+		SimpleColumn c = new SimpleColumn("sc1", true);
+		for (Integer i:numbers){
+			c.insertTuple(i);
+		}
+	}
+
+}

@@ -1,0 +1,29 @@
+package minidb;
+
+
+public class AVLNode {
+ public AVLNode left; // left child
+ public AVLNode right; // right chikd
+ public AVLNode parent; // parent node
+ public int key; //value
+ public int position;
+ public int balance;
+
+
+ public AVLNode(int k, int position) {
+  this.left = null;
+  this.parent = null;
+  this.right = null;
+  balance = 0;
+  key = k;
+  position = position;
+ }
+ public String toString() {
+  return "" + key;
+ }
+ 
+ public int getPosition(){
+	 return position;
+ }
+
+}
